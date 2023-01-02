@@ -1,0 +1,15 @@
+## Day 1 of 100 Days of YARA
+
+rule EICAR_test_file {
+	meta:
+		author = "ДАЗ"
+		day = 1
+		description = "Never written a Yara rule in my life.  \n
+		Yara rule to match against EICAR test file to get comfortable and start a routine."
+		
+	strings:
+		$test_str = "EICAR-STANDARD-ANTIVIRUS-TEST-FILE" ascii wide
+		
+	condition:
+		$test_str
+}
