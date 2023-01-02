@@ -1,0 +1,26 @@
+/*
+After reading over the YARA Performance guide at https://github.com/Neo23x0/YARA-Performance-Guidelines/, 
+I wanted to go back and rewrite Day1 using the guidance from that write-up.  I also wanted to change up the
+formatting for the metadata to look more uniform with other individuals writing
+
+Ultimately, I want to make sure that I am mastering the basics first before moving on to more advanced and complex
+rules.  As Bruce Lee said, “I am not afraid of a person who knows 10000 kicks. But I am afraid of a person who knows one kick but practices it for 10000 times.” 
+*/
+
+rule EICAR_testfile_2 
+{
+	meta:
+		author = "ДАЗ"
+		description = "Detection for EICAR test file for anti-virus software"
+		date = "2023-01-02"
+		revision = "1"
+		DaysofYARA = "2/100"
+    reference = "https://www.eicar.org/download-anti-malware-testfile/"
+		
+	strings:
+		$s1 = "$EICAR"
+    $h1 = { 24 45 49 43 41 52 }
+ 
+	condition:
+		$s1 or $h1
+}
