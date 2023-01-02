@@ -15,11 +15,11 @@ rule EICAR_testfile_2
 		date = "2023-01-02"
 		revision = "1"
 		DaysofYARA = "2/100"
-    reference = "https://www.eicar.org/download-anti-malware-testfile/"
+    		reference = "https://www.eicar.org/download-anti-malware-testfile/"
 		
 	strings:
 		$s1 = "$EICAR"
-    $h1 = { 24 45 49 43 41 52 }
+    		$h1 = { 24 45 49 43 41 52 }
  
 	condition:
 		$s1 or $h1
