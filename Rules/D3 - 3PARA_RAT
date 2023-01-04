@@ -1,0 +1,20 @@
+import "pe"
+import "hash" // I wrote "imphash" first.  :facepalm:
+
+rule 3PARA_RAT_Metadata
+{
+	meta:
+		Author: "ДАЗ"
+		Description: "Detect samples of 3PARA RAT"
+		Reference1: "http://cdn0.vox-cdn.com/assets/4589853/crowdstrike-intelligence-report-putter-panda.original.pdf"
+		Reference2: "https://www.virustotal.com/gui/file/a4314fed1ada801ff078ad4e42845b9781398ea574516972cfa6da50cc304b50/details"
+		DaysOfYARA: "3/100"
+    // hash: "" // not quite sure what to put here, but I've seen others have this.  Need to read more on the documentation.
+	
+	// strings:  // Didn't know you not have this field and still have the rule fire.  Neat!
+
+	condition:
+    // both hashes pulled from Virus Total (Reference2)
+		pe.imphash() == "4ed508719d2ea2fffaadd21ac14d6813" or
+		hash.md5(pe.rich_siganture.clear_data) == "b49c6dd12ce63f453cca85a1b251577e" 
+}
