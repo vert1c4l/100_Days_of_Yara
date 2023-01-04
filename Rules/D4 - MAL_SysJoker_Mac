@@ -1,0 +1,29 @@
+/*
+Another simple rule that I have not tested yet.  I am feeling more comfortable in writing the rules and getting a good idea of how to use different key words.  I don't think I've written a ***good*** rule yet, but I think I am learning.  As mentioned for Day 3, I need to set up a good way to grab samples and test these rules to make sure they actually work.  Good to have the theory, but means jack shit if I can't get it to be practical.  
+
+Other references used in today's rule -
+https://objective-see.org/blog/blog_0x71.html
+https://twitter.com/AbbyMCH
+*/
+
+rule MAL_SysJoker_Mac {
+	
+	meta:
+		author: "ДАЗ"
+		description: "Detect backdoor SysJoker targeting macOS"
+		reference1: "https://www.intezer.com/blog/incident-response/new-backdoor-sysjoker/"
+		reference2: "https://objective-see.org/blog/blog_0x6C.html"
+		hash: "e06e06752509f9cd8bc85aa1aa24dba2"
+		DaysOfYARA = "4/100"
+		Version = "1.0"
+		
+	strings:
+		$xor_key: "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDkfNl+Se7jm7sGSrSSUpV3HUl3vEwuh+xn4qBY6aRFL91x0HIgcH2AM2rOlLdoV8v1vtG1oPt9QpC1jSxShnFw8evGrYnqaou7gLsY5J2B06eq5UW7+OXgb77WNbU90vyUbZAucfzy0eF1HqtBNbkXiQ6SSbquuvFPUepqUEjUSQIDAQAB"
+		$path1 = "/Users/"
+		$path2 = "/Library/MacOsServices"
+		$path3 = "/Library/LaunchAgents/com.apple.update.plist"
+	
+	condition:
+		$xor_key and
+		all of ($path*)
+}
